@@ -32,7 +32,11 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        _audio.Play();
+        // 사망 하면서 오브젝트가 비활성화 되면서 동시에 AudioSource도 비활성화 되기 때문에 소리가 재생 되지 않음 
+        // 오디오를 관리할 객체를 따로 설정하는것이 좋음
+        //_audio.Play();
+     
+        AudioSource.PlayClipAtPoint(_audio.clip,transform.position);
         gameObject.SetActive(false);
     }
 }
