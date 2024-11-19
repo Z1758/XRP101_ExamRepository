@@ -20,7 +20,12 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void SingletonInit()
     {
-        _instance = GetComponent<T>();
-        DontDestroyOnLoad(gameObject);
+        // 게임매니저가 복사가 된다
+        if (_instance == null)
+        {
+
+            _instance = GetComponent<T>();
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }
