@@ -18,7 +18,7 @@
 제시된 프로젝트에서 발생하는 `문제들을 모두 서술`하고 올바르게 동작하도록 `소스코드를 개선`하시오.
 
 ## 답안
-- StateMachine의 ChangeState에 있는 CurrentState.Exit(); 구문과 겹쳐 무한 반복 되고 있어서 스택 오버 플로우가 발생한다
+- StateAttack의 Exit 함수와 StateMachine의 ChangeState에 있는 CurrentState.Exit(); 구문이 겹쳐 무한 반복 되고 있기에 스택 오버 플로우가 발생한다
   따로 상태를 빠져나갈 함수의 구현이 필요
   
 - 존재하지 않는 인터페이스를 참조하다 에러가 발생 TryGetComponent를 사용해 예외 처리
