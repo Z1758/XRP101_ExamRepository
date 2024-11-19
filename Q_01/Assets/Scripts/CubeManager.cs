@@ -9,14 +9,17 @@ public class CubeManager : MonoBehaviour
     private CubeController _cubeController;
     private Vector3 _cubeSetPoint;
 
+
+    // 생명 주기 미스 Instantiate 되기전에 SetCubePosition이 먼저 실행됨
     private void Awake()
     {
-        SetCubePosition(3, 0, 3);
+        CreateCube();
+       
     }
 
     private void Start()
     {
-        CreateCube();
+        SetCubePosition(3, 0, 3);
     }
 
     private void SetCubePosition(float x, float y, float z)
@@ -24,7 +27,22 @@ public class CubeManager : MonoBehaviour
         _cubeSetPoint.x = x;
         _cubeSetPoint.y = y;
         _cubeSetPoint.z = z;
+
+        // 첫번째 방법
+        _cubeController.SetPosition(_cubeSetPoint);
+
+
+
+        // 두번째 방법
+        /*
+        _cubeController.SetPoint= _cubeSetPoint;
         _cubeController.SetPosition();
+        */
+
+        // 세번째 방법
+        /*
+        _cubeController.transform.position = _cubeSetPoint;
+        */
     }
 
     private void CreateCube()
