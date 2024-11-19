@@ -19,5 +19,6 @@ public class StateIdle : PlayerState
         {
             Machine.ChangeState(StateType.Attack);
         }
+        
     }
 }

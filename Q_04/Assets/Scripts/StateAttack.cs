@@ -27,13 +27,21 @@ public class StateAttack : PlayerState
 
     public override void OnUpdate()
     {
+        
         Debug.Log("Attack On Update");
     }
 
     public override void Exit()
     {
+        // StateMachine의 ChangeState에 있는 CurrentState.Exit(); 구문과 겹쳐 무한 반복 되고 있어서 스택 오버 플로우가 발생한다
+        //Machine.ChangeState(StateType.Idle);
+    }
+
+    public void ExitAttackState()
+    {
         Machine.ChangeState(StateType.Idle);
     }
+    
 
     private void Attack()
     {
@@ -45,7 +53,14 @@ public class StateAttack : PlayerState
         IDamagable damagable;
         foreach (Collider col in cols)
         {
+            // foreach문이 돌아가는중에 적이 제거 될 경우에 빈 오브젝트를 참조하다 에러가 발생, 예외처리가 필요
             damagable = col.GetComponent<IDamagable>();
+
+        
+            if(damagable == null)
+            {
+                continue;
+            }
             damagable.TakeHit(Controller.AttackValue);
         }
     }
@@ -55,7 +70,8 @@ public class StateAttack : PlayerState
         yield return _wait;
 
         Attack();
-        Exit();
+
+        ExitAttackState();
     }
 
 }
