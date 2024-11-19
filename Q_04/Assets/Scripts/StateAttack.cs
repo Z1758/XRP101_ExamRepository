@@ -53,15 +53,13 @@ public class StateAttack : PlayerState
         IDamagable damagable;
         foreach (Collider col in cols)
         {
-            // foreach문이 돌아가는중에 적이 제거 될 경우에 빈 오브젝트를 참조하다 에러가 발생, 예외처리가 필요
-            damagable = col.GetComponent<IDamagable>();
-
-        
-            if(damagable == null)
+            // 존재하지 않는 인터페이스를 참조하다 에러가 발생 TryGetComponent를 사용해 예외 처리
+            if (col.TryGetComponent<IDamagable>(out damagable))
             {
-                continue;
+                damagable.TakeHit(Controller.AttackValue);
             }
-            damagable.TakeHit(Controller.AttackValue);
+        
+           
         }
     }
 
