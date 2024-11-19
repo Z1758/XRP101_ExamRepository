@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         direction.z = Input.GetAxisRaw("Vertical");
 
         if (direction == Vector3.zero) return;
-        
-        transform.Translate(_status.MoveSpeed * Time.deltaTime * direction);
+        // 한쪽 키만 입력 했을땐 벡터의 값이 (-)1,0 혹은 (-)0,1을 입력 받게 되지만 동시에 입력 받았을땐 대각선으로 이동하며 (-)1,1이 되어 루트 2가 되기 때문에 벡터의 정규화가 필요
+       transform.Translate(_status.MoveSpeed * Time.deltaTime * direction.normalized);
     }
 }
